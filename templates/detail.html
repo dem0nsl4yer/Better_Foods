@@ -1,0 +1,36 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Quotes
+{% endblock %}
+
+{% block main %}
+<main class = "container py-5 text-center">
+    <table class = "table">
+        <thead>
+            <tr>
+            <th class = "text-start"> Name</th>
+            <th class = "text-start">Rating</th>
+            <th class = "text-end">Website</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                    <td class ="text-start">{{ z }}</td>
+                    <td class ="text-start">{{ gr['result']['rating'] }}</td>
+                    <td class ="text-end"><a href= {{ gr['result']['website'] }}>{{ gr['result']['website'] }} </a></td>
+            </tr>
+        </tbody>
+    </table>
+                    <p class="text-start"><b>Here are the sample reviews:</b></p>
+                    {% set d = namespace(value=1) %}  
+                    {% for rev in gr['result']['reviews'] %}
+                        <p class="text-start"> 
+                        <b> Review no {{ d.value }}. </b> {{ rev['text'] }}
+                        {% set d.value = d.value+1 %}
+                        </p>
+                    {% endfor %}
+
+
+</main>
+{% endblock %}

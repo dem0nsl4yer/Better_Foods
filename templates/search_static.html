@@ -1,0 +1,105 @@
+<style>
+
+@media (min-width: 1400px) {
+    .floatl {
+      float: left;
+    }
+  }
+  
+</style>
+
+{% extends "layout.html" %}
+    
+    {% block title %}
+        Quoted
+    {% endblock %}
+    
+    {% block main %}
+    <div class = "container-fluid py-5 text-center">
+        <form action="/search" method="post">
+            <div class="mb-3">
+                <input autocomplete = "off" autofocus class="form-control mx-auto w-auto" id="password" name="symbol" placeholder="Location" type="text">
+            </div>
+            <button class="btn btn-outline-secondary" type="submit">Get food</button>
+        </form>
+    </div>
+    <div class = "floatl container-fluid py-5 text-center" style="width: 50%;">
+        <table class="table table-hover" style=" float:left">
+            <thead>
+                <tr class = "text-start"><b>Google results</b></tr>
+                <tr>
+                <th class = "text-start">Status</th>
+                <th class = "text-start"> Name</th>
+                <th class = "text-start">Rating</th>
+                <th class = "text-start">Level</th>
+                <th class = "text-mid">Type</th>
+                <th class = "text-end">Reviews</th>
+                <th class = "text-end">Distance</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for trans in t %}
+                <tr>
+                        <td class ="text-start">{{ trans['business_status'] }}</td>
+                        <td class ="text-start">{{ trans['name'] }}</td>
+                        <td class ="text-start">{{ trans['rating'] }}</td>
+                        <td class ="text-start">{{ trans['price_level'] }}</td>
+                        <td class ="text-end">{{ trans['types'] | join(" ") }}</td>
+                        <td class ="text-end">{{ trans['user_ratings_total'] }}</td>
+                        <td class ="text-end"> {{ trans['ds'] }} meters from {{ trans['or'] }}</td>
+                        <td>
+                        <form action="/detail" method="post" id = "demo">
+                            <input type="hidden" name="test" value = {{ trans['place_id'] }}>
+                            <input type="hidden" name="name" value = {{ trans['name']| replace(' ', '%') }}>
+                            <input type="hidden" name="search" value = {{ trans['S'] }}>
+                            <button class="btn btn-outline-secondary" type="submit">More details</button>
+                        </form>
+                        </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <div class = "floatl container-fluid py-5 text-center" style="width: 50%;">
+        <table class="table table-hover" >
+            <thead>
+                <tr class = "text-start"><b>YELP results</b></tr>
+                <tr>
+                <th class = "text-start"> Name</th>
+                <th class = "text-start">Rating</th>
+                <th class = "text-start">Level</th>
+                <th class = "text-mid">Type</th>
+                <th class = "text-end">Reviews</th>
+                <th class = "text-end">Distance</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for trans in dY %}
+                <tr>
+                    <td class ="text-start">{{ trans['name'] }}</td>
+                    <td class ="text-start">{{ trans['rating'] }}</td>
+                    <td class ="text-start">{{ trans['price'] }}</td>
+                    <td class ="text-end">
+                        {% for yo in trans['categories'] %}
+                            {{ yo['title'] }}
+                        {% endfor %}
+                        </td>
+                    <td class ="text-end">{{ trans['review_count'] }}</td>
+                    <td class ="text-end"> {{ trans['ds'] }} meters from {{ trans['or'] }}</td>
+                    <td>
+                        <form action="/detail" method="post" id = "demo">
+                            <input type="hidden" name="test" value = {{ trans['id'] }}>
+                            <input type="hidden" name="search" value = {{ trans['S'] }}>
+                            <input type="hidden" name="url" value = {{ trans['url'] }}>
+                            <input type="hidden" name="r" value = {{ trans['rating'] }}>
+                            <input type="hidden" name="name" value = {{ trans['name']| replace(' ', '%') }}>
+                            <button class="btn btn-outline-secondary" type="submit">More details</button>
+                        </form>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    
+    {% endblock %}

@@ -1,0 +1,112 @@
+<style>
+    .inline {
+    display: inline;
+    }
+    
+    .link-button {
+    background: none;
+    border: none;
+    color: blue;
+    text-decoration: underline;
+    cursor: pointer;
+    font-size: 1em;
+    font-family: serif;
+    }
+    .link-button:focus {
+    outline: none;
+    }
+    .link-button:active {
+    color:red;
+    }
+    </style>
+    
+      {% extends "layout.html" %}
+    
+    {% block title %}
+        Quoted
+    {% endblock %}
+    
+    {% block main %}
+    <main class = "container py-5 text-center">
+        <div class = "container-fluid py-5 text-center">
+            <table class="table table-hover">
+                <thead>
+                    <tr class = "text-start"><b>GMAPS options</b></tr>
+                    <tr>
+                    <th class = "text-start"> Name</th>
+                    <th class = "text-start">Rating</th>
+                    <th class = "text-start">Level</th>
+                    <th class = "text-mid">Type</th>
+                    <th class = "text-end">Reviews</th>
+                    <th class = "text-end">Distance</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for trans in d %}
+                    <tr>
+                        {#  <td class ="text-start" onclick=document.getElementById('demo').submit();>{{ trans['name'] }}</td>#}
+                        <td class ="text-start">{{ trans['name'] }}</td>
+                            <td class ="text-start">{{ trans['rating'] }}</td>
+                            <td class ="text-start">{{ trans['price_level'] }}</td>
+                            <td class ="text-start">{{ trans['types'] | join(" ") }}</td>
+                            <td class ="text-end">{{ trans['user_ratings_total'] }}</td>
+                            <td class ="text-end"> {{ trans['ds'] }} meters from {{ trans['or'] }}</td>
+                            <td>
+                            <form action="/visit" method="post" id = "demo">
+                                <input type="hidden" name="symbol" value = {{ trans['place_id'] }}>
+                                <input type="hidden" name="search" value = {{ trans['S'] }}>
+                                <input type="hidden" name="rat" value = {{ trans['rating'] }}>
+                                <input type="hidden" name="lev" value = {{ trans['price_level'] }}>
+                                <input type="hidden" name="nam" value = {{ trans['name']| replace(' ', '%') }}>
+                                <button class="btn btn-outline-secondary" type="submit">Log visit</button>
+                            </form>
+                            </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <div class = "container-fluid py-5 text-center">
+            <table class="table table-hover"> 
+                <thead>
+                    <tr class = "text-start"><b>YELP options</b></tr>
+                    <tr>
+                        <th class = "text-start"> Name</th>
+                        <th class = "text-start">Rating</th>
+                        <th class = "text-start">Level</th>
+                        <th class = "text-mid">Type</th>
+                        <th class = "text-end">Reviews</th>
+                        <th class = "text-end">Distance</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for trans in dY %}
+                    <tr>
+                        {#  <td class ="text-start" onclick=document.getElementById('demo').submit();>{{ trans['name'] }}</td>#}
+                        <td class ="text-start">{{ trans['name'] }}</td>
+                            <td class ="text-start">{{ trans['rating'] }}</td>
+                            <td class ="text-start">{{ trans['price'] }}</td>
+                            <td class ="text-start">
+                                {% for yo in trans['categories'] %}
+                                    {{ yo['title'] }}
+                                {% endfor %}
+                            </td>
+                            <td class ="text-end">{{ trans['review_count'] }}</td>
+                            <td class ="text-end"> {{ trans['ds'] }} meters from {{ trans['or'] }}</td>
+                            <td>
+                            <form action="/visit" method="post" id = "demo">
+                                <input type="hidden" name="symbol" value = {{ trans['id'] }}>
+                                <input type="hidden" name="search" value = {{ trans['S'] }}>
+                                <input type="hidden" name="rat" value = {{ trans['rating'] }}>
+                                <input type="hidden" name="lev" value = {{ trans['price'] }}>
+                                <input type="hidden" name="nam" value = {{ trans['name']| replace(' ', '%') }}>
+                                <button class="btn btn-outline-secondary" type="submit">Log visit</button>
+                            </form>
+                            </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </main>
+    {% endblock %}

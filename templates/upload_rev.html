@@ -1,0 +1,59 @@
+<style>
+    .button {
+    margin-top: 50px;
+    }
+</style>
+    
+{% extends "layout.html" %}
+
+{% block title %}
+    Visits
+{% endblock %}
+
+{% block main %}
+<main class = container>
+    <div class="mx-auto w-50 p-3" align="center">
+        <form action="/add" method="post" id = "inp_upload">
+            <table class="table table-hover">
+                <tbody>
+                    <tr>
+                        <th scope="col">Name</th>
+                        <td>{{ n }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="col">{{ s }} Rating</th>
+                        <td>{{ r }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="col">{{ s }}  Price level</th>
+                        <td>{{ l }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="col">Visit Time</th>
+                        <td>{{ time | replace('%', ' ')}}</td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text" id="inputGroup-sizing-default">Better Foods rating:</span>
+                </div>
+                <input type="hidden" name="nam" value = {{ n |replace(' ', '%') }}>
+                <input type="hidden" name="gr" value = {{ r }}>
+                <input type="hidden" name="l" value = {{ l }}>
+                <input type="hidden" name="source" value = {{ s }}>
+                <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" name="rating" type="text">
+            </div>
+            <div class="bd-example">
+            <div class="input-group">
+                  <span class="input-group-text">Was it delicious?</span>
+                <textarea class="form-control" aria-label="With textarea" name="review"></textarea>
+            </div>
+            <div class="d-grid gap-2">
+                <button class="button btn btn-outline-success" type="submit">submit</button>
+            </div>
+        </form>
+    </div>
+</div>
+</main>
+{% endblock %}
