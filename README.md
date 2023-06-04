@@ -1,18 +1,49 @@
-# BETTER FOODS
-#### Video Demo:  <https://www.youtube.com/watch?v=HA6ljpb-dPA>
-#### Description:
-This is a website built around Google maps and Yelp APIs with the idea to filter out good restaurants around a locality with respective ratings, and create a personal database with users own ratings and comments.
-It has multiple pages namely:
-Search - this is lifeline of the website, where maximal user interaction occurs. User searches a particular location, and the API calls to Google Maps and Yelp create tables with all the outputs.
-The co-ordinates of the place are back-calculated by calling in the GEOCODE API, a derivative of Google Maps. These coordinates are then employed to fetch the nearby restaurants within 1000M in both Google Places API and the YELP API. YELP API fortunately, can calculate these metrics directly by using the approximate location string.
-These outputs have been filtered out with rating calls and also provide estimates from origin location by employing Haversine method. Both API calls occur simultaneously and we filter out the particular parameters that are needed for further assignment namely: the operational status of the restaurant as in they are closed or not; the address of the particular place; the key NAME of the particular place; the averaged rating for the place; the price level from 1-5; and the distance between the keyed in place and the particular restaurant.
-The distance between the particular search query and the restaurant in question is calculated by employing the haversine function. This function basically pulls in the co-ordinates of the two places and calculates the distance in meters in this particular implementation.
-Details - The user then, has the option to dive deeper, and see further detail such as 3-5 top reviews and restaurant’s website.
-Visit- Once the user decides to visit a particular restaurant, this page/database stores these entries till the user wishes to review the particular place with their rating and the respective comments.
-Review- Once the user reviews a particular restaurant, it deletes the entry from visited database and adds it onto the reviewed entries. This is done, in order to let the user, create a database of entries that have been visited, but have still not been reviewed.
-History- These entries then are always available to the user in the History page, OR the homepage. This is useful, as it provides a shorthand display of all the restaurants that the user really likes in case they wish to visit some particular place again.
-Around this there are pages for registering/signing in/logout employed to maintain a userbase. Registration mandates the user to provide proper inputs and performs the re-check for contingency in case password is mismatched.
-As we are employing global variables, on logging out all the variables are essentially re set in order to not cause any anomalies when users login back and forth during traffic.
-All the entries saved in by the user are handled by the SQLITE3 database. Herein, we have employed the C, R, U, D principles of creating TABLES, Reading into tables, Updating tables and Deleting entries as and when database entries need to be updated.
+# Better Foods
 
+[![Video Demo](https://www.youtube.com/watch?v=HA6ljpb-dPA)](https://www.youtube.com/watch?v=HA6ljpb-dPA)
+
+## Description
+
+Better Foods is a sophisticated website that leverages the power of Google Maps and Yelp APIs to provide users with an exceptional dining experience. The website allows users to explore and discover highly-rated restaurants in their desired locality, while also enabling them to create a personalized database of their visited and reviewed restaurants.
+
+## Features
+
+- **Search**: The Search page is the lifeline of the website, where users can interact and find restaurants. Users can input a specific location, and the website makes parallel API calls to Google Maps and Yelp to retrieve relevant restaurant data. The search query is reverse-geocoded to obtain the coordinates of the location, which are then used to fetch nearby restaurants from both the Google Places API and the Yelp API.
+
+- **Filtering**: The retrieved restaurant data is filtered based on various parameters, including operational status, address, name, average rating, price level, and distance from the search query. The Haversine method is employed to calculate the distance between the search query and each restaurant, ensuring accurate results.
+
+- **Details**: The Details page provides users with further information about a specific restaurant, including top reviews and the restaurant's website. Users can dive deeper into their restaurant exploration journey.
+
+- **Visit**: When users decide to visit a particular restaurant, the entry is stored in the database for later review. The Visit page allows users to keep track of their visited restaurants and plan their future reviews.
+
+- **Review**: The Review page enables users to provide ratings and comments for the restaurants they have visited. Once a review is submitted, the entry is removed from the visited database and added to the reviewed entries, maintaining an organized and efficient user experience.
+
+- **History**: The History page displays a comprehensive list of all the restaurants the user has reviewed. It serves as a convenient reference for the user to revisit their favorite places or share recommendations with others.
+
+- **User Authentication**: Better Foods includes pages for user registration, signing in, and logging out to maintain a userbase. Proper input validation and password matching ensure a secure and reliable user experience.
+
+## Installation
+
+1. Clone the repository from [GitHub](https://github.com/dem0nsl4yer/Better_Foods).
+2. Install the necessary dependencies using the following command: pip install -r requirements.txt
+3. Run the application using the command:python app.py
+4. Access the website locally at [http://localhost:5000](http://localhost:5000).
+
+## Usage
+
+1. Register an account or sign in if you already have one.
+2. Use the Search page to enter a location and explore nearby restaurants.
+3. Click on a restaurant to view more details and top reviews.
+4. Visit a restaurant to save it for later review.
+5. Review a visited restaurant by providing a rating and comments.
+6. Access your reviewed restaurants in the History page.
+7. Log out when you're done.
+
+## Contributing
+
+Contributions are welcome! If you have any suggestions or improvements, feel free to open an issue or submit a pull request on [GitHub](https://github.com/your-username/better-foods).
+
+## License
+
+This project is licensed under the [MIT License](https://opensource.org/licenses/MIT).
 
