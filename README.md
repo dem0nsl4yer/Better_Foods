@@ -41,7 +41,7 @@ Better Foods is a sophisticated website that leverages the power of Google Maps 
 
 ## Contributing
 
-Contributions are welcome! If you have any suggestions or improvements, feel free to open an issue or submit a pull request on [GitHub](https://github.com/your-username/better-foods).
+Contributions are welcome! If you have any suggestions or improvements, feel free to open an issue or submit a pull request on [GitHub](https://github.com/dem0nsl4yer/Better_Foods/).
 
 ## License
 
